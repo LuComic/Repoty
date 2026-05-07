@@ -1,0 +1,31 @@
+{
+  "name": "repoty",
+  "version": "0.1.0",
+  "description": "Deterministic repository indexing CLI for AI coding agents",
+  "type": "module",
+  "bin": {
+    "repoty": "./dist/cli.js"
+  },
+  "scripts": {
+    "dev": "bun run src/cli.ts",
+    "build": "bun build src/cli.ts --target=node --outfile=dist/cli.js",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run typecheck && bun test && bun run build"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "latest",
+    "ai": "latest",
+    "commander": "latest",
+    "fast-glob": "latest",
+    "ignore": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
