@@ -114,6 +114,16 @@ Useful generated docs:
 - `.repoty/agent/ROUTES.md`
 - `.repoty/agent/FILES.md`
 
+For agent tasks, prefer targeted commands over reading generated docs:
+
+```bash
+bun run src/cli.ts focus "fix duplicate invoice reminders"
+bun run src/cli.ts explain src/notifications/scheduler.js
+bun run src/cli.ts find "reminder scheduler"
+```
+
+`focus` is designed to reduce context instead of adding more: it returns the most likely start files, likely verification tests, likely routes, and routes that can probably be ignored.
+
 ## Notes
 
 - Source files are never modified.

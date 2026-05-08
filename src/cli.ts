@@ -11,6 +11,7 @@ import { runDoctor } from "./commands/doctor.js";
 import { runExplain } from "./commands/explain.js";
 import { runFile } from "./commands/file.js";
 import { runFind } from "./commands/find.js";
+import { runFocus } from "./commands/focus.js";
 import { runInit } from "./commands/init.js";
 import { runIntegrate } from "./commands/integrate.js";
 import { runMap } from "./commands/map.js";
@@ -219,6 +220,38 @@ program
           `- ${item.path} (${item.score}) — ${item.reasons.join("; ")}`,
         );
       }
+    }),
+  );
+
+program
+  .command("focus")
+  .argument("<task>")
+  .option("--limit <n>", "Limit start-here results", "5")
+  .option("--json")
+  .action((task, options) =>
+    runCommand(async () => {
+      const result = await runFocus(
+        task,
+        parsePositiveInteger(options.limit, "--limit"),
+      );
+      if (options.json) return printJson(result);
+      console.log(`# Focus for ${task}`);
+      console.log("Start here:");
+      printList(
+        result.startHere.map(
+          (file) => `\`${file.path}\` (${file.score}) — ${file.why.join("; ")}`,
+        ),
+      );
+      console.log("Verify with:");
+      printList(
+        result.verifyWith.map(
+          (file) => `\`${file.path}\` (${file.score}) — ${file.why.join("; ")}`,
+        ),
+      );
+      console.log("Likely routes:");
+      printList(result.likelyRoutes);
+      console.log("Probably ignore:");
+      printList(result.ignoreRoutes);
     }),
   );
 

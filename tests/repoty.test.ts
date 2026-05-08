@@ -9,6 +9,7 @@ import {
 } from "../src/ai/provider.js";
 import { FileSummaryAISchema } from "../src/ai/schemas.js";
 import { DEFAULT_CONFIG, RepotyConfigSchema } from "../src/core/config.js";
+import { focusStore } from "../src/core/focus.js";
 import { buildGraph, scoreRelatedFiles } from "../src/core/graph.js";
 import { detectDiff, indexProject } from "../src/core/indexer.js";
 import { runIntegrate } from "../src/commands/integrate.js";
@@ -18,6 +19,7 @@ import {
   renderSitemapMarkdown,
 } from "../src/core/markdown.js";
 import { assignRoutes, buildRoutes } from "../src/core/routes.js";
+import { searchStore, tokenizeQuery } from "../src/core/search.js";
 import {
   isNeverIndexPath,
   readGitignore,
@@ -232,6 +234,53 @@ describe("graph, routes, markdown", () => {
   });
 });
 
+describe("search and focus", () => {
+  test("query tokenization handles simple word variants", () => {
+    expect(tokenizeQuery("scheduling invoices")).toContain("schedul");
+    expect(tokenizeQuery("scheduling invoices")).toContain("invoice");
+  });
+
+  test("search ranks path and metadata matches", async () => {
+    const root = await copyFixture("simple-ts");
+    const { store } = await indexProject({
+      projectRoot: root,
+      config: DEFAULT_CONFIG,
+      noAi: true,
+      all: true,
+    });
+    const results = searchStore(store, "auth session", 3);
+    expect(results[0].type).toBe("file");
+    expect(results[0].type === "file" ? results[0].path : "").toBe(
+      "src/auth/session.ts",
+    );
+    await rm(root, { recursive: true, force: true });
+  });
+
+  test("focus returns start files, tests, and ignore routes", async () => {
+    const root = await copyFixture("simple-ts");
+    await mkdir(path.join(root, "test"), { recursive: true });
+    await writeFile(
+      path.join(root, "test/session.test.ts"),
+      'import { getSession } from "../src/auth/session";\n',
+      "utf8",
+    );
+    const { store } = await indexProject({
+      projectRoot: root,
+      config: DEFAULT_CONFIG,
+      noAi: true,
+      all: true,
+    });
+    const focus = focusStore(store, "fix auth session", { limit: 4 });
+    expect(focus.startHere.some((file) => file.path === "src/auth/session.ts"))
+      .toBe(true);
+    expect(focus.verifyWith.some((file) => file.path === "test/session.test.ts"))
+      .toBe(true);
+    expect(focus.likelyRoutes).toContain("auth");
+    expect(focus.ignoreRoutes).not.toContain("auth");
+    await rm(root, { recursive: true, force: true });
+  });
+});
+
 describe("integrations", () => {
   test("creates and safely updates agent instruction files", async () => {
     const root = await copyFixture("simple-ts");
@@ -251,7 +300,7 @@ describe("integrations", () => {
       const agents = await readFile(agentsPath, "utf8");
       const cursor = await readFile(cursorPath, "utf8");
       expect(agents).toContain("<!-- repoty:start -->");
-      expect(agents).toContain(".repoty/agent/SITEMAP.md");
+      expect(agents).toContain('repoty focus "<task>"');
       expect(cursor).toContain("alwaysApply: true");
 
       await writeFile(

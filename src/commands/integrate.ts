@@ -44,26 +44,25 @@ function targetPath(projectRoot: string, target: IntegrationTarget): string {
 function repotyBlock(outDir: string): string {
   const normalizedOutDir = outDir.replace(/\\/g, "/").replace(/\/$/, "");
   return `${START_MARKER}
-## Repository map
+## Repoty context
 
-A compact repoty map is available at \`${normalizedOutDir}/agent/SITEMAP.md\`.
+Repoty has indexed this repository in \`${normalizedOutDir}/\`.
 
-Use it for broad, unfamiliar, or cross-file tasks to find likely files before doing wide source reads. For obvious/local tasks, go straight to the relevant source/test files.
+For broad, unfamiliar, or cross-file tasks, run a targeted query before wide source reads:
 
-Helpful commands when navigation is unclear:
-
-- \`repoty find <query>\` — search mapped files/routes
-- \`repoty explain <target>\` — get a short recommended reading path
+- \`repoty focus "<task>"\` — first choice; returns start files, likely tests, and areas to ignore
+- \`repoty explain <target>\` — use when you already know a route or file
+- \`repoty find <query>\` — use for quick mapped file/route search
 - \`repoty status\` — check whether the map is stale
 
-Avoid reading the full file index unless needed; prefer the sitemap, search, or explain output first.
+Only open \`${normalizedOutDir}/agent/SITEMAP.md\` for architecture-level orientation. Do not read the full generated file index unless a targeted command is insufficient.
 ${END_MARKER}`;
 }
 
 function initialContent(target: IntegrationTarget, block: string): string {
   if (target === "cursor") {
     return `---
-description: Use the repoty repository map before reading source files
+description: Use targeted repoty context before wide source reads
 alwaysApply: true
 ---
 

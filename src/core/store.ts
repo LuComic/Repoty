@@ -126,7 +126,7 @@ export async function writeStore(
   const sitemap = renderSitemapMarkdown(store.routes, store.files);
   const routesMd = renderRoutesMarkdown(store.routes);
   const filesMd = renderFilesMarkdown(store.files);
-  const readme = `# repoty\n\nStart with \`SITEMAP.md\` for compact repository navigation. Use \`repoty find <query>\` or \`repoty explain <target>\` for targeted reading paths.\n`;
+  const readme = `# repoty\n\nStart with \`repoty focus "<task>"\` for task-specific file narrowing. Use \`SITEMAP.md\` only for architecture-level orientation.\n`;
 
   await writeFile(paths.sitemapMd, readme, "utf8");
   await writeFile(paths.sitemapMdAlias, sitemap, "utf8");

@@ -10,13 +10,55 @@ export type SearchResult =
     }
   | { type: "route"; name: string; score: number; purpose: string };
 
+function splitWords(value: string): string[] {
+  return value
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+}
+
+function tokenVariants(token: string): string[] {
+  const variants = new Set([token]);
+  if (token.endsWith("ies") && token.length > 4)
+    variants.add(`${token.slice(0, -3)}y`);
+  if (token.endsWith("es") && token.length > 3) variants.add(token.slice(0, -2));
+  if (token.endsWith("s") && token.length > 3) variants.add(token.slice(0, -1));
+  if (token.endsWith("ing") && token.length > 5)
+    variants.add(token.slice(0, -3));
+  if (token.endsWith("ed") && token.length > 4) variants.add(token.slice(0, -2));
+  return [...variants];
+}
+
+export function tokenizeQuery(query: string): string[] {
+  return [...new Set(splitWords(query).flatMap(tokenVariants))].filter(
+    (token) => token.length > 1,
+  );
+}
+
 function scoreText(text: string, tokens: string[], phrase: string): number {
   const lower = text.toLowerCase();
+  const words = new Set(splitWords(text));
   let score = 0;
   if (phrase && lower.includes(phrase)) score += 10;
   for (const token of tokens) {
     if (!token) continue;
-    if (lower.includes(token)) score += 3;
+    if (words.has(token)) score += 5;
+    else if (lower.includes(token)) score += 2;
+  }
+  return score;
+}
+
+function scorePath(filePath: string, tokens: string[], phrase: string): number {
+  const lower = filePath.toLowerCase();
+  const basename = lower.split("/").at(-1) ?? lower;
+  const pathWords = new Set(splitWords(filePath));
+  let score = 0;
+  if (phrase && lower.includes(phrase)) score += 16;
+  for (const token of tokens) {
+    if (basename.includes(token)) score += 8;
+    else if (pathWords.has(token)) score += 5;
+    else if (lower.includes(token)) score += 2;
   }
   return score;
 }
@@ -55,11 +97,13 @@ export function searchStore(
   limit = 10,
 ): SearchResult[] {
   const phrase = query.toLowerCase().trim();
-  const tokens = phrase.split(/\s+/).filter(Boolean);
+  const tokens = tokenizeQuery(query);
   const results: SearchResult[] = [];
 
   for (const file of Object.values(store.files)) {
-    const score = scoreText(fileHaystack(file), tokens, phrase);
+    const score =
+      scoreText(fileHaystack(file), tokens, phrase) +
+      scorePath(file.path, tokens, phrase);
     if (score > 0) {
       results.push({
         type: "file",
