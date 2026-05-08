@@ -1,0 +1,14 @@
+Session file: /Users/ainurakk/.pi/agent/sessions/--Users-ainurakk-Documents-GitHub-repoty-tests-runs-feature-control-run1--/2026-05-07T19-25-32-937Z_019e03e7-0788-719c-95d8-47e5b272b1d2.jsonl
+Session ID: 019e03e7-0788-719c-95d8-47e5b272b1d2
+CWD: /Users/ainurakk/Documents/GitHub/repoty-tests/runs/feature-control-run1
+Created: 2026-05-07T19:25:32.937Z
+Modified: 2026-05-07T19:25:58.022Z
+Messages: 17 active-branch / 17 total
+Entries: 19 active-branch / 19 total
+Tool calls: 9
+Tool results: 9
+Tokens: 11,762 total (6,075 input, 567 output, 5,120 cache read, 0 cache write)
+Cost: $0.049945 ($0.030375 input, $0.017010 output, $0.002560 cache read, $0.000000 cache write)
+First user: Implement priority ordering for the ticket queue so urgent > high > normal > low, closed tickets are skipped, and run the tests before you finish.
+Last stop reason: stop
+Last model: openai-codex/gpt-5.5

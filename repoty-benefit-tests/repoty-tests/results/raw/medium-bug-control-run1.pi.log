@@ -1,0 +1,9 @@
+Fixed the proration sign bug in `src/billing/proration.js`.
+
+Change made:
+- Plan change adjustments now calculate `newCharge - oldCredit`, so:
+  - upgrades produce a positive amount due
+  - downgrades produce a negative credit
+
+Tests run:
+- `npm test` ✅ all tests passing.

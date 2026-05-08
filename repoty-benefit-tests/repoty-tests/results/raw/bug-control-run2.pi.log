@@ -1,0 +1,13 @@
+Fixed the failing tests with a minimal change in `src/orderTotals.js`.
+
+Change made:
+- Apply fixed discounts before tax calculation.
+- Clamp discounted taxable subtotal at zero.
+
+Tests run:
+
+```bash
+npm test
+```
+
+Result: all tests passing.

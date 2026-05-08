@@ -1,0 +1,4 @@
+Implemented archived filtering in `src/search/queryProjects.js` while keeping text matching unchanged.
+
+Tests run:
+- `npm test` ✅

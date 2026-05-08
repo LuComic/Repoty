@@ -1,0 +1,3 @@
+Added `xs` support in `src/ui/badge.js`.
+
+Tests: `npm test` ✅

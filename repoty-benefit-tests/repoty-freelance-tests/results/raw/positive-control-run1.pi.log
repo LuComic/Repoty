@@ -1,0 +1,13 @@
+Cause: `mergePageConfigDocument` was always taking `normalizePageDocument(value)`’s component state. For config-only updates (no `state` provided), `normalizeLiveState` falls back to default live state, overwriting existing Select/Radio selections.
+
+Fix (minimal + safe): in `lib/pageDocument/normalize.ts`, `mergePageConfigDocument` now detects whether the incoming update actually includes a valid `state` object for the component; if not, it preserves `baseComponent.state` while still applying the config changes.
+
+Changed file:
+- `lib/pageDocument/normalize.ts`
+
+Benchmark test run:
+- `bun test benchmark/mergePageConfigDocument.test.ts` ✅ (2 passing)
+
+Additional commands run (per repo instructions):
+- `bunx tsc --noEmit` (fails in this environment due to missing deps/types)
+- `bun lint` (fails: `eslint` not found)

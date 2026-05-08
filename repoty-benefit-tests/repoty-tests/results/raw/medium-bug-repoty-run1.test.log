@@ -1,0 +1,26 @@
+
+> repoty-medium-bug-case@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: upgrade charges prorated difference for remaining days
+ok 1 - upgrade charges prorated difference for remaining days
+  ---
+  duration_ms: 0.629833
+  type: 'test'
+  ...
+# Subtest: downgrade produces negative adjustment credit and no amount due
+ok 2 - downgrade produces negative adjustment credit and no amount due
+  ---
+  duration_ms: 0.050333
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 38.57975

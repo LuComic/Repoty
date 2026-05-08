@@ -1,0 +1,9 @@
+Implemented priority ordering in `src/queue.js`:
+
+- `urgent > high > normal > low`
+- Closed tickets are skipped
+- Preserves insertion order among tickets with the same priority
+
+Ran tests:
+
+- `npm test` ✅ all tests passed.

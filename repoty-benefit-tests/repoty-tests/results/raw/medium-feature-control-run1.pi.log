@@ -1,0 +1,16 @@
+Implemented atomic inventory reservation in `src/shipping/fulfillment.js`.
+
+Behavior now:
+- Checks all required stock before mutating anything.
+- Aggregates duplicate SKUs before checking availability.
+- Throws `Insufficient stock for <sku>` if any line cannot be fulfilled.
+- Leaves inventory and order unchanged on failure.
+- Reserves inventory and marks order ready only after all stock is available.
+
+Tests run successfully:
+
+```bash
+npm test
+```
+
+All tests passed.

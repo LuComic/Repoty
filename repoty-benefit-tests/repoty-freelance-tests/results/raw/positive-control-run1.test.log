@@ -1,0 +1,10 @@
+bun test v1.3.5 (1e86cebd)
+
+benchmark/mergePageConfigDocument.test.ts:
+(pass) mergePageConfigDocument > preserves select live state when a config-only update changes metadata [0.78ms]
+(pass) mergePageConfigDocument > preserves radio live state when a config-only update changes labels [0.07ms]
+
+ 2 pass
+ 0 fail
+ 4 expect() calls
+Ran 2 tests across 1 file. [13.00ms]

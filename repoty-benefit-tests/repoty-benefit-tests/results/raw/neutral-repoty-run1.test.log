@@ -1,0 +1,26 @@
+
+> repoty-neutral-case@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: default search excludes archived projects
+ok 1 - default search excludes archived projects
+  ---
+  duration_ms: 0.53625
+  type: 'test'
+  ...
+# Subtest: archived: all includes archived matches too
+ok 2 - archived: all includes archived matches too
+  ---
+  duration_ms: 0.076625
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 39.367125

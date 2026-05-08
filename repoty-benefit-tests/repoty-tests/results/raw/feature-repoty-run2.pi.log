@@ -1,0 +1,14 @@
+Implemented priority ordering in `src/queue.js`:
+
+- `urgent > high > normal > low`
+- Closed tickets are skipped
+- Same-priority tickets retain insertion order
+
+Tests run successfully:
+
+```bash
+npm test
+# 2 passed
+```
+
+Note: Tried `repoty update`, but `repoty` is not installed/available in PATH.

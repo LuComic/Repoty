@@ -1,0 +1,7 @@
+Fixed in `src/notifications/reminderPolicy.js`.
+
+Cause: once an invoice already had a reminder, `needsReminder()` always returned `false`, even if the invoice due date changed inside the reminder window.
+
+Change: reschedule when `invoice.reminder.dueAt !== invoice.dueAt`.
+
+Tests: `npm test` ✅

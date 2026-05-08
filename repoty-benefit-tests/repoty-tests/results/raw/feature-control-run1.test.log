@@ -1,0 +1,26 @@
+
+> repoty-feature-case@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: next returns the highest priority open ticket
+ok 1 - next returns the highest priority open ticket
+  ---
+  duration_ms: 0.342709
+  type: 'test'
+  ...
+# Subtest: closed urgent tickets are skipped and high priority wins over normal
+ok 2 - closed urgent tickets are skipped and high priority wins over normal
+  ---
+  duration_ms: 0.070458
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 36.141667

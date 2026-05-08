@@ -1,0 +1,18 @@
+Implemented atomic inventory reservation in `src/shipping/fulfillment.js`.
+
+Behavior now:
+- Pre-checks all required stock, grouped by SKU.
+- Throws `Error("Insufficient stock for <sku>")` if any line cannot be fulfilled.
+- Does not mutate inventory or order on pre-check failure.
+- Rolls back inventory if reservation fails mid-operation.
+- Marks the order ready only after successful reservation.
+
+Tests run:
+
+```bash
+npm test
+```
+
+Result: all tests passed.
+
+Note: attempted `repoty status`, but `repoty` is not installed/available in PATH.

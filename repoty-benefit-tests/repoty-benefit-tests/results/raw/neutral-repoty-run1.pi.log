@@ -1,0 +1,4 @@
+Implemented archived filtering in `src/search/queryProjects.js`.
+
+Tests pass:
+- `node --test` ✅

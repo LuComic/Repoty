@@ -1,0 +1,10 @@
+Fixed the failing test with a minimal change in `src/orderTotals.js`.
+
+Change made:
+- Apply fixed discounts before calculating tax.
+- Floor taxable amount at zero.
+
+Validation:
+- `npm test` passes: 2/2 tests passing.
+
+Note: Tried `repoty status`, but `repoty` is not installed/available in PATH.

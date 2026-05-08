@@ -1,0 +1,6 @@
+Fixed in `src/notifications/reminderPolicy.js`.
+
+Cause: existing reminders were always treated as up-to-date, even if `invoice.dueAt` changed.  
+Change: only skip rescheduling when `reminder.dueAt === invoice.dueAt`.
+
+Tests: `npm test --silent` ✅

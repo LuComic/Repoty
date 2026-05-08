@@ -1,0 +1,9 @@
+Fixed `src/orderTotals.js` so discounts reduce the taxable subtotal before tax is calculated, while keeping totals non-negative.
+
+Ran tests:
+
+```bash
+npm test
+```
+
+All tests pass.

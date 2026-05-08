@@ -1,0 +1,13 @@
+Implemented minimal fix in `src/orderTotals.js`.
+
+Change:
+- Apply fixed discount before calculating tax.
+- Floor taxable amount at zero to prevent negative totals.
+
+Tests run:
+
+```bash
+npm test
+```
+
+Result: all tests passing.

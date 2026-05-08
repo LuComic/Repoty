@@ -1,0 +1,14 @@
+Session file: /Users/ainurakk/.pi/agent/sessions/--Users-ainurakk-Documents-GitHub-repoty-benefit-tests-runs-neutral-control-run1--/2026-05-08T15-26-21-115Z_019e0832-65bb-7249-9d67-c6b4559a9f31.jsonl
+Session ID: 019e0832-65bb-7249-9d67-c6b4559a9f31
+CWD: /Users/ainurakk/Documents/GitHub/repoty-benefit-tests/runs/neutral-control-run1
+Created: 2026-05-08T15:26:21.115Z
+Modified: 2026-05-08T15:26:38.779Z
+Messages: 19 active-branch / 19 total
+Entries: 21 active-branch / 21 total
+Tool calls: 11
+Tool results: 11
+Tokens: 15,509 total (4,175 input, 582 output, 10,752 cache read, 0 cache write)
+Cost: $0.006557 ($0.003131 input, $0.002619 output, $0.000806 cache read, $0.000000 cache write)
+First user: Implement archived filtering for project search in this repository so the existing tests pass. Preserve the current text matching behavior and run the tests bef
+Last stop reason: stop
+Last model: openai-codex/gpt-5.4-mini

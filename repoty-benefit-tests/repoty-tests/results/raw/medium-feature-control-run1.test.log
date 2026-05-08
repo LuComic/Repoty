@@ -1,0 +1,26 @@
+
+> repoty-medium-feature-case@1.0.0 test
+> node --test
+
+TAP version 13
+# Subtest: prepare reserves stock and marks order ready
+ok 1 - prepare reserves stock and marks order ready
+  ---
+  duration_ms: 0.8245
+  type: 'test'
+  ...
+# Subtest: prepare is atomic when stock is insufficient
+ok 2 - prepare is atomic when stock is insufficient
+  ---
+  duration_ms: 0.1695
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 38.346125
